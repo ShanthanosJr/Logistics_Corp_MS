@@ -1,0 +1,20 @@
+/* Prevent bouncing/overscroll effect */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+#root {
+  height: 100vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Alternative method if the above doesn't work perfectly */
+* {
+  overscroll-behavior: contain;
+}
