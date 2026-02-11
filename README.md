@@ -1,4 +1,4 @@
-# Logistics Corp Management System
+# Logistics Corp Inventory Management System
 
 A comprehensive logistics management system built with Spring Boot backend and React frontend.
 
