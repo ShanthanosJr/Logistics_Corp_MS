@@ -191,26 +191,21 @@ function DisplayItem() {
         doc.setTextColor(colors.white);
         doc.text("LOGISTICS CORP", pageWidth / 2, 45, { align: "center" });
 
-        // Subtitle (White with spacing)
+        // Subtitle Line 1: "INVENTORY MASTER REPORT" (centered)
         doc.setFont("helvetica", "bold");
-        doc.setFontSize(9);
+        doc.setFontSize(12);
         doc.setTextColor(200, 200, 200);
+        doc.text("INVENTORY MASTER REPORT", pageWidth / 2, 55, { 
+            align: "center", 
+            //charSpace: 2 
+        });
 
+        // Subtitle Line 2: Date (centered, next line)
         const dateStr = new Date().toLocaleDateString().toUpperCase();
-        const subtitleText = `INVENTORY MASTER REPORT  |  ${dateStr}`;
-
-        // --- MANUAL CENTERING FIX ---
-        // 1. Get width of text normally
-        const textWidth = doc.getTextWidth(subtitleText);
-
-        // 2. Add extra width for charSpace (approx 2 points per character)
-        const charSpacingTotal = (subtitleText.length - 1) * 2;
-        const totalWidth = textWidth + (charSpacingTotal * 0.3527); // Convert pt to mm approx
-
-        // 3. Calculate Start X: (PageWidth - TotalWidth) / 2
-        const startX = (pageWidth - totalWidth) / 2;
-
-        doc.text(subtitleText, startX, 55, { charSpace: 2 });
+        doc.setFontSize(8);
+        doc.text(dateStr, pageWidth / 2, 62, { 
+            align: "center" 
+        });
 
         // --- 2. OVERVIEW SECTION ---
         let finalY = 90;
@@ -349,7 +344,14 @@ function DisplayItem() {
             doc.text(`PAGE ${i} OF ${pageCount}`, pageWidth - 14, pageHeight - 9, { align: 'right' });
         }
 
-        doc.save("Logistics_Corp_Inventory.pdf");
+        // Generate filename with date format: Inventory_YY_MM_DD.pdf
+        const now = new Date();
+        const year = now.getFullYear().toString().slice(-2); // Last 2 digits of year
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // Month 01-12
+        const day = String(now.getDate()).padStart(2, '0'); // Day 01-31
+
+        const filename = `Logistics_Corp_Inventory_${year}_${month}_${day}.pdf`;
+        doc.save(filename);
     };
 
     // --- FILTERING ---

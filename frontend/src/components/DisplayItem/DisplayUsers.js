@@ -166,17 +166,21 @@ function DisplayUsers() {
         doc.setTextColor(colors.white);
         doc.text("PERSONNEL DIRECTORY", pageWidth / 2, 40, { align: "center" });
 
-        // Subtitle with Dynamic Date
+        // Subtitle Line 1: "AUTHORIZED ACCESS REGISTRY" (centered)
         doc.setFont("helvetica", "bold");
-        doc.setFontSize(8);
+        doc.setFontSize(12);
         doc.setTextColor(180, 180, 180);
+        doc.text("AUTHORIZED ACCESS REGISTRY", pageWidth / 2, 50, { 
+            align: "center", 
+            //charSpace: 1.5 
+        });
+
+        // Subtitle Line 2: Date (centered, next line)
         const dateStr = new Date().toLocaleDateString().toUpperCase();
-        
-        // Manual Center Calculation for spacing
-        const subtitle = `AUTHORIZED ACCESS REGISTRY  |  ${dateStr}`;
-        const textWidth = doc.getTextWidth(subtitle);
-        const startX = (pageWidth - (textWidth + (subtitle.length * 0.5))) / 2; // approx spacing adjustment
-        doc.text(subtitle, startX, 50, { charSpace: 1.5 });
+        doc.setFontSize(7);
+        doc.text(dateStr, pageWidth / 2, 57, { 
+            align: "center" 
+        });
 
         // --- 2. EXECUTIVE SUMMARY (Split Layout) ---
         let startY = 85;
@@ -308,7 +312,14 @@ function DisplayUsers() {
             doc.text(`PAGE ${i} OF ${pageCount}`, pageWidth - 14, pageHeight - 5, { align: 'right' });
         }
 
-        doc.save("Nexus_Personnel_Registry.pdf");
+        // Generate filename with date format: Personnel_YY_MM_DD.pdf
+        const now = new Date();
+        const year = now.getFullYear().toString().slice(-2); // Last 2 digits of year
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // Month 01-12
+        const day = String(now.getDate()).padStart(2, '0'); // Day 01-31
+
+        const filename = `Logistics_Corp_Personnel_${year}_${month}_${day}.pdf`;
+        doc.save(filename);
     };
 
     // Helper for Images
