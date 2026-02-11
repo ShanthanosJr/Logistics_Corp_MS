@@ -1,20 +1,40 @@
-/* Prevent bouncing/overscroll effect */
+/* Allow vertical scrolling */
 html,
 body {
-  height: 100%;
-  overflow: hidden;
-  overscroll-behavior: none;
+  min-height: 100%;
+  height: auto;
+  margin: 0;                    /* ADD THIS - removes default spacing */
+  padding: 0;                   /* ADD THIS */
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: none;  /* CHANGE: none for vertical only */
+  overscroll-behavior-x: auto;
 }
 
+/* Root should be able to grow with content */
 #root {
-  height: 100vh;
-  overflow-y: auto;
-  overscroll-behavior: contain;
+  min-height: 100vh;
+  overflow-y: visible;
+  overscroll-behavior-y: none;  /* CHANGE: none for vertical only */
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
 }
 
-/* Alternative method if the above doesn't work perfectly */
-* {
-  overscroll-behavior: contain;
+/* Prevent body bounce on iOS specifically */
+body {
+  position: fixed;              /* ADD THIS for iOS */
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#root {
+  position: absolute;           /* ADD THIS to work with fixed body */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;             /* CHANGE: auto instead of visible */
+  overflow-x: hidden;
+  overscroll-behavior: none;
 }
