@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: logistics-backend
-    env: docker
-    dockerfilePath: ./Dockerfile
-    rootDir: .
-    envVars:
-      - key: JAVA_VERSION
-        value: 17
