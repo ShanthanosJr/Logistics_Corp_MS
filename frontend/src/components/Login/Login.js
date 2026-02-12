@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Login = ({ setIsLoggedIn }) => { 
-    
+const Login = ({ setIsLoggedIn }) => {
+
     // --- STATE & LOGIC ---
     const [loginDetails, setLoginDetails] = useState({
         email: "",
         password: ""
     });
 
-    const [error, setError] = useState(''); 
+    const [error, setError] = useState('');
     const [isSuccess, setIsSuccess] = useState(false); // <--- NEW STATE
     const [isNavigating, setIsNavigating] = useState(false);
     const navigate = useNavigate();
@@ -18,23 +18,23 @@ const Login = ({ setIsLoggedIn }) => {
     // --- NEW: UNIVERSAL TRANSITION HANDLER ---
     const handleTransition = (path) => {
         setIsNavigating(true); // 1. Start Animation
-        
+
         // 2. Wait 1 second
         setTimeout(() => {
             navigate(path);
-        }, 1000); 
+        }, 1000);
     };
 
     const { email, password } = loginDetails;
 
     // --- HANDLERS ---
     const onInputChange = (e) => {
-        setError(''); 
+        setError('');
         setLoginDetails({ ...loginDetails, [e.target.name]: e.target.value });
     };
 
     const onFormSubmit = async (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         setError('');
 
         try {
@@ -48,9 +48,9 @@ const Login = ({ setIsLoggedIn }) => {
                 localStorage.setItem('token', response.data.token); // <--- CRITICAL
                 localStorage.setItem('userRole', response.data.role);
                 localStorage.setItem('userFirstName', response.data.firstname);
-                
+
                 // --- SUCCESS HANDLING ---
-                setIsSuccess(true); 
+                setIsSuccess(true);
                 setTimeout(() => navigate('/user-profile'), 3000);
             } else {
                 setError("Login failed. Please check your credentials.");
@@ -138,7 +138,7 @@ const Login = ({ setIsLoggedIn }) => {
 
     return (
         <div className="container-fluid" style={styles.container}>
-            
+
             {/* --- INJECT CSS ANIMATION --- */}
             <style>{`
                 .wave-loader {
@@ -166,38 +166,38 @@ const Login = ({ setIsLoggedIn }) => {
                 }
             `}</style>
             <div className="row h-100">
-                
+
                 {/* --- LEFT SIDE: Form or Success --- */}
                 <div className="col-lg-6 col-md-12" style={styles.leftSide}>
-                    
+
                     {/* CONDITIONAL RENDERING */}
                     {isSuccess ? (
                         <div style={styles.successContainer}>
                             {/* Animated Checkmark */}
                             <div className="mb-4" style={{
-                                width: '80px', height: '80px', borderRadius: '50%', backgroundColor: '#000', 
+                                width: '80px', height: '80px', borderRadius: '50%', backgroundColor: '#000',
                                 display: 'flex', alignItems: 'center', justifyContent: 'center'
                             }}>
                                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="square" strokeLinejoin="miter">
                                     <polyline points="20 6 9 17 4 12"></polyline>
                                 </svg>
                             </div>
-                            
+
                             <h2 className="display-6 fw-bold text-black text-uppercase mb-3" style={{ letterSpacing: '-1px' }}>
                                 Access Granted
                             </h2>
                             <p className="text-muted text-center mb-4" style={{ maxWidth: '400px' }}>
                                 Credentials verified. Establishing secure connection to your dashboard...
                             </p>
-                            
+
                             {/* Loading Bar */}
                             <div style={{ width: '200px', height: '2px', backgroundColor: '#f0f0f0', position: 'relative', overflow: 'hidden' }}>
-                                <div style={{ 
-                                    position: 'absolute', left: 0, top: 0, height: '100%', width: '100%', 
-                                    backgroundColor: '#000', animation: 'progress 3s linear' 
+                                <div style={{
+                                    position: 'absolute', left: 0, top: 0, height: '100%', width: '100%',
+                                    backgroundColor: '#000', animation: 'progress 3s linear'
                                 }}></div>
                             </div>
-                            
+
                             {/* CSS Animation */}
                             <style>
                                 {`
@@ -209,7 +209,7 @@ const Login = ({ setIsLoggedIn }) => {
                     ) : (
                         // STANDARD FORM VIEW
                         <div className="mx-auto" style={{ maxWidth: '450px', width: '100%' }}>
-                            
+
                             {/* Header Section */}
                             <div className="mb-5 text-start">
                                 <span className="badge bg-dark mb-2 rounded-0">SECURE ACCESS</span>
@@ -259,9 +259,9 @@ const Login = ({ setIsLoggedIn }) => {
                                 </div>
 
                                 <div className="d-grid mb-4">
-                                    <button 
-                                        type="submit" 
-                                        className="btn btn-dark shadow-lg" 
+                                    <button
+                                        type="submit"
+                                        className="btn btn-dark shadow-lg"
                                         style={styles.button}
                                         onMouseOver={(e) => e.target.style.backgroundColor = '#333'}
                                         onMouseOut={(e) => e.target.style.backgroundColor = '#000'}
@@ -273,7 +273,7 @@ const Login = ({ setIsLoggedIn }) => {
 
                             <div className="text-center mt-4">
                                 <p className="small text-muted">
-                                    Don't have an account? 
+                                    Don't have an account?
                                     <span
                                         className="ms-2 text-black fw-bold"
                                         style={{ cursor: 'pointer' }}
@@ -281,7 +281,7 @@ const Login = ({ setIsLoggedIn }) => {
                                     >
                                         Register Here
                                     </span>
-                            
+
                                 </p>
                             </div>
                         </div>
@@ -318,7 +318,7 @@ const Login = ({ setIsLoggedIn }) => {
                             <div className="wave-dot"></div>
                             <div className="wave-dot"></div>
                         </div>
-                        <div className="mt-4 text-dark small fw-bold text-uppercase" style={{letterSpacing: '2px'}}>Processing Request</div>
+                        <div className="mt-4 text-dark small fw-bold text-uppercase" style={{ letterSpacing: '2px' }}>Processing Request</div>
                     </div>
                 )}
 
