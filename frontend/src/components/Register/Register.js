@@ -375,7 +375,7 @@ const Register = () => {
                     {/* CONDITIONAL RENDERING */}
                     {isSuccess ? (
                         <div style={styles.successContainer}>
-                            
+
                             {/* Animated Checkmark */}
                             <div className="mb-4" style={{
                                 width: '80px', height: '80px', borderRadius: '50%', backgroundColor: '#000',
@@ -646,25 +646,25 @@ const Register = () => {
                         </div>
                     )}
 
-                    
+
                 </div>
 
             </div>
             {/* --- WAVE LOADER OVERLAY (Only visible when clicking Login) --- */}
-                    {isNavigating && (
-                        <div style={styles.loaderOverlay}>
-                            <div className="wave-loader">
-                                <div className="wave-dot"></div>
-                                <div className="wave-dot"></div>
-                                <div className="wave-dot"></div>
-                                <div className="wave-dot"></div>
-                                <div className="wave-dot"></div>
-                            </div>
-                            <div className="mt-4 text-dark small fw-bold text-uppercase" style={{ letterSpacing: '2px' }}>
-                                Redirecting to Portal
-                            </div>
-                        </div>
-                    )}
+            {isNavigating && (
+                <div style={styles.loaderOverlay}>
+                    <div className="wave-loader">
+                        <div className="wave-dot"></div>
+                        <div className="wave-dot"></div>
+                        <div className="wave-dot"></div>
+                        <div className="wave-dot"></div>
+                        <div className="wave-dot"></div>
+                    </div>
+                    <div className="mt-4 text-dark small fw-bold text-uppercase" style={{ letterSpacing: '2px' }}>
+                        Redirecting to Portal
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
