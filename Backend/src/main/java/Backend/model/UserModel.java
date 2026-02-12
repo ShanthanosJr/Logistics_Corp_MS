@@ -14,6 +14,7 @@ public class UserModel {
     private String userid;
     private String firstname;
     private String lastname;
+    @jakarta.persistence.Column(unique = true)
     private String email;
     private String password;
     private String phone;
