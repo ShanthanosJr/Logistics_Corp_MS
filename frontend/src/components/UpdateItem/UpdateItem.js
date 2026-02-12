@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import api from "../../api/axiosConfig";
+import api, { API_BASE_URL } from "../../api/axiosConfig";
 
 const UpdateItem = () => {
     // --- STATE & LOGIC ---
@@ -25,7 +25,7 @@ const UpdateItem = () => {
         itemDetails: ""
     });
 
-    const IMAGE_BASE_URL = "http://localhost:8081/user/uploads";
+    const IMAGE_BASE_URL = `${API_BASE_URL}/user/uploads`;
     const [selectedFile, setSelectedFile] = useState(null);
     const [existingItemImage, setExistingItemImage] = useState("");
     const [fieldErrors, setFieldErrors] = useState({});

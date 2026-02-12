@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
@@ -184,7 +184,7 @@ const Register = () => {
                 const formDataImage = new FormData();
                 formDataImage.append("file", selectedFile);
 
-                const imgUploadResponse = await axios.post("http://localhost:8081/user/userImg", formDataImage, {
+                const imgUploadResponse = await api.post("/user/userImg", formDataImage, {
                     headers: { 'Content-Type': 'multipart/form-data' }
                 });
 
@@ -201,7 +201,7 @@ const Register = () => {
                 userimg: userImageName
             };
 
-            await axios.post("http://localhost:8081/register", updatedUser, {
+            await api.post("/register", updatedUser, {
                 headers: { 'Content-Type': 'application/json' }
             });
 

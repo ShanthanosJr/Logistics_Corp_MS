@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import api from '../../api/axiosConfig';
+import api, { API_BASE_URL } from '../../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 
 const UserProfile = () => {
@@ -281,7 +281,7 @@ const UserProfile = () => {
                     <div style={styles.avatarCircle}>
                         {user.userimg ? (
                             <img
-                                src={`http://localhost:8081/user/uploads/${user.userimg}`}
+                                src={`${API_BASE_URL}/user/uploads/${user.userimg}`}
                                 alt="Profile"
                                 style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
                             />

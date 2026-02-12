@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 
 const Login = ({ setIsLoggedIn }) => {
@@ -38,7 +38,7 @@ const Login = ({ setIsLoggedIn }) => {
         setError('');
 
         try {
-            const response = await axios.post("http://localhost:8081/login", loginDetails, {
+            const response = await api.post("/login", loginDetails, {
                 headers: { 'Content-Type': 'application/json' }
             });
 

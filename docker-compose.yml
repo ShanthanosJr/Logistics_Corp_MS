@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./Backend
+    ports:
+      - "8081:8081"
+    environment:
+      - PORT=8081
+      - DB_URL=jdbc:mysql://host.docker.internal:3306/spring
+      - DB_USERNAME=root
+      - DB_PASSWORD=12345678
+    # If on Linux, use '172.17.0.1' instead of 'host.docker.internal' to access host's MySQL
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./Backend/uploads:/app/uploads
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        - REACT_APP_API_URL=http://localhost:8081
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import api from '../../api/axiosConfig';
+import api, { API_BASE_URL } from '../../api/axiosConfig';
 
 const UpdateProfile = () => {
     // --- STATE & LOGIC ---
@@ -47,11 +47,11 @@ const UpdateProfile = () => {
     // --- NEW: TRANSITION HANDLER ---
     const handleTransition = (path) => {
         setIsNavigating(true); // 1. Start the Wave Animation
-        
+
         // 2. Wait 1 second, then navigate
         setTimeout(() => {
             navigate(path);
-        }, 1000); 
+        }, 1000);
     };
 
     const { userid, firstname, lastname, email, phone, address, type, currentPassword, newPassword, confirmPassword } = formData;
@@ -364,7 +364,7 @@ const UpdateProfile = () => {
             width: '100%',
             transition: 'all 0.3s ease'
         }, // <--- Make sure there is a comma here
-        
+
         // NEW: Loader Overlay Styles
         loaderOverlay: {
             position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
@@ -385,7 +385,7 @@ const UpdateProfile = () => {
 
     return (
         <div className="container-fluid p-0" style={styles.container}>
-            
+
             {/* --- NEW: GLOBAL ANIMATION STYLES --- */}
             <style>{`
                 /* 1. Wave Animation (For Cancel Transition) */
@@ -501,7 +501,7 @@ const UpdateProfile = () => {
                                             />
                                         ) : existingUserImage ? (
                                             <img
-                                                src={`http://localhost:8081/user/uploads/${existingUserImage}`}
+                                                src={`${API_BASE_URL}/user/uploads/${existingUserImage}`}
                                                 alt="Current Profile"
                                                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                             />
@@ -720,7 +720,7 @@ const UpdateProfile = () => {
                             <div className="wave-dot"></div>
                             <div className="wave-dot"></div>
                         </div>
-                        <div className="mt-4 text-dark small fw-bold text-uppercase" style={{letterSpacing: '2px'}}>
+                        <div className="mt-4 text-dark small fw-bold text-uppercase" style={{ letterSpacing: '2px' }}>
                             Discarding Changes
                         </div>
                     </div>
