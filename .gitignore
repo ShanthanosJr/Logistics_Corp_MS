@@ -14,7 +14,7 @@ frontend/dist/
 frontend/.env.local
 frontend/.env.development
 frontend/.env.test
-frontend/.env.production
+
 
 # IDE
 .vscode/
