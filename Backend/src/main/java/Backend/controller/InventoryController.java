@@ -22,7 +22,7 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 @RestController
-@CrossOrigin(origins = "*")
+
 public class InventoryController {
     @Autowired
     private InventoryRepository inventoryRepository;

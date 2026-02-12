@@ -29,7 +29,7 @@ import java.util.Optional;
 
 @SuppressWarnings("unused")
 @RestController
-@CrossOrigin(origins = "*")
+
 public class UserController {
     @Autowired
     private UserRepository userRepository;
